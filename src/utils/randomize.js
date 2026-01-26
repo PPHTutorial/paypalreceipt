@@ -15,7 +15,7 @@ export const getRandomReceipt = () => {
     const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
     const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
     const platform = platforms[Math.floor(Math.random() * platforms.length)];
-    const amount = (Math.random() * 50 + 1).toFixed(2);
+    const amount = (Math.random() * 10000 + 1).toFixed(2);
     const note = notes[Math.floor(Math.random() * notes.length)];
     const date = new Date().toLocaleDateString('en-GB', {
         day: 'numeric',

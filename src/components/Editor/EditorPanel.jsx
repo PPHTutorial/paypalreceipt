@@ -44,7 +44,7 @@ const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScr
           />
         </div>
         <div className="preset-amounts">
-          {[10, 50, 100, 500].map(amt => (
+          {[100, 500, 1000, 5000].map(amt => (
             <button key={amt} onClick={() => onChange({ ...data, amount: amt.toFixed(2) })}>
               ${amt}
             </button>
