@@ -34,7 +34,7 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
 
         {/* Main Title */}
         <h1 className="main-title">
-          {platform} sent you ${amount} USD
+          {platform} sent you ${parseFloat(amount).toLocaleString('en-US')} USD
         </h1>
 
         {/* Note Section */}
