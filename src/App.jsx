@@ -29,7 +29,19 @@ const App = () => {
     if (receiptRef.current === null) return;
 
     if (format === 'png') {
-      toPng(receiptRef.current, { cacheBust: true, pixelRatio: 2 })
+      const width = receiptRef.current.offsetWidth;
+      const height = receiptRef.current.scrollHeight;
+      
+      toPng(receiptRef.current, { 
+        cacheBust: true, 
+        pixelRatio: 2,
+        width: width,
+        height: height,
+        style: {
+          transform: 'none',
+          margin: '0',
+        }
+      })
         .then((dataUrl) => {
           const link = document.createElement('a');
           link.download = `PayPal_Receipt_${data.platform}_${data.amount}.png`;
@@ -38,14 +50,26 @@ const App = () => {
         })
         .catch((err) => console.error('PNG Export failed', err));
     } else if (format === 'pdf') {
-      toPng(receiptRef.current, { cacheBust: true, pixelRatio: 2 })
+      const width = receiptRef.current.offsetWidth;
+      const height = receiptRef.current.scrollHeight;
+
+      toPng(receiptRef.current, { 
+        cacheBust: true, 
+        pixelRatio: 2,
+        width: width,
+        height: height,
+        style: {
+          transform: 'none',
+          margin: '0',
+        }
+      })
         .then((dataUrl) => {
           const pdf = new jsPDF({
             orientation: 'portrait',
             unit: 'px',
-            format: [receiptRef.current.offsetWidth, receiptRef.current.offsetHeight]
+            format: [width, height]
           });
-          pdf.addImage(dataUrl, 'PNG', 0, 0, receiptRef.current.offsetWidth, receiptRef.current.offsetHeight);
+          pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
           pdf.save(`PayPal_Receipt_${data.platform}_${data.amount}.pdf`);
         })
         .catch((err) => console.error('PDF Export failed', err));
@@ -62,7 +86,19 @@ const App = () => {
         // Wait for state to apply and DOM to update
         setTimeout(async () => {
           try {
-            const dataUrl = await toPng(receiptRef.current, { cacheBust: true, pixelRatio: 2 });
+            const width = receiptRef.current.offsetWidth;
+            const height = receiptRef.current.scrollHeight;
+
+            const dataUrl = await toPng(receiptRef.current, { 
+              cacheBust: true, 
+              pixelRatio: 2,
+              width: width,
+              height: height,
+              style: {
+                transform: 'none',
+                margin: '0'
+              }
+            });
             const link = document.createElement('a');
             link.download = `PayPal_Batch_${currentIdx + 1}_${randomData.platform}.png`;
             link.href = dataUrl;
@@ -73,7 +109,7 @@ const App = () => {
           } catch (err) {
             console.error('Batch generation failed', err);
           }
-        }, 800); // 800ms delay to ensure DOM is ready and avoids browser rate limits
+        }, 1000); // 1s delay for reliability
       };
 
       generateNext();
