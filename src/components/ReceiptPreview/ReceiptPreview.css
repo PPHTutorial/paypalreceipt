@@ -1,12 +1,11 @@
 .receipt-container {
   background: #FAF8F5;
   width: 100%;
-  max-width: 640px;
   margin: 0 auto;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #001435;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  overflow: hidden;
+  overflow: visible;
 }
 
 .receipt-inner {
