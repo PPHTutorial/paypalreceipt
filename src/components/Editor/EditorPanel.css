@@ -1,0 +1,231 @@
+.editor-panel {
+  width: 320px;
+  height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.editor-header {
+  margin-bottom: 1rem;
+}
+
+.editor-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--accent), #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.editor-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.editor-section label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: var(--card-dark);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding-left: 0.75rem;
+}
+
+.input-group input {
+  border: none;
+  width: 100%;
+  background: transparent;
+}
+
+.preset-amounts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.preset-amounts button {
+  background: var(--border);
+  color: var(--text-main);
+  font-size: 0.7rem;
+  padding: 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.preset-amounts button:hover {
+  background: var(--accent);
+}
+
+.date-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.date-text-input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.date-picker-input {
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.calendar-icon {
+  position: absolute;
+  right: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.batch-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.batch-input {
+  width: 60px;
+  text-align: center;
+}
+
+.btn-batch {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: var(--success);
+  color: white;
+  font-weight: 600;
+}
+
+.btn-batch:hover {
+  filter: brightness(1.1);
+}
+
+.input-group:focus-within {
+  border-color: var(--accent);
+}
+
+textarea {
+  background: var(--card-dark);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 0.75rem;
+  border-radius: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 0;
+}
+
+.screen-selector {
+  display: flex;
+  background: var(--card-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.25rem;
+  justify-content: space-between;
+}
+
+.screen-selector button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  border-radius: 6px;
+  color: var(--text-muted);
+  background: transparent;
+}
+
+.screen-selector button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+}
+
+.screen-selector button.active {
+  background: var(--accent);
+  color: white;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+
+.btn-randomize, .btn-export-png, .btn-export-pdf {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.btn-randomize {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+}
+
+.btn-randomize:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-export-png {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-export-png:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.btn-export-pdf {
+  background: var(--secondary);
+  color: white;
+}
+
+.btn-export-pdf:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}

@@ -1,0 +1,174 @@
+.receipt-container {
+  background: #FAF8F5;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #001435;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.receipt-inner {
+  padding: 0;
+}
+
+.header-welcome {
+  background: #fff;
+  color: #687173;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px;
+}
+
+.paypal-logo-section {
+  padding: 15px 20px 25px 20px;
+}
+
+.main-title {
+  padding: 0px 35px 30px 35px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38px;
+  color: #001c64;
+  margin: 0;
+}
+
+.note-section {
+  padding: 0px 35px 25px 35px;
+}
+
+.note-title {
+  font-size: 20px;
+  line-height: 28px;
+  color: #001435;
+  margin: 0;
+}
+
+.quote-container {
+  padding: 0px 35px 25px 35px;
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.quote-text {
+  font-weight: 500;
+  font-size: 26px;
+  line-height: 32px;
+  color: #001c64;
+  text-align: center;
+  flex: 1;
+}
+
+.details-card {
+  margin: 0 35px 25px 35px;
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px 30px;
+}
+
+.details-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #001c64;
+  margin-bottom: 20px;
+}
+
+.detail-row {
+  margin-bottom: 20px;
+}
+
+.detail-label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  padding-bottom: 2px;
+}
+
+.detail-value {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.info-text {
+  padding: 0px 35px 25px 35px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #001435;
+}
+
+.login-btn-container {
+  padding: 0px 35px 25px 35px;
+}
+
+.login-btn {
+  background-color: #003087;
+  color: #ffffff;
+  border-radius: 50px;
+  padding: 12px 35px;
+  display: inline-block;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.help-title {
+  padding: 0px 35px 25px 35px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #001c64;
+}
+
+.footer-logo {
+  padding: 0 35px;
+}
+
+.footer-links {
+  padding: 10px 35px;
+  font-size: 11px;
+  line-height: 31px;
+  color: #001435;
+  font-weight: 500;
+}
+
+.footer-links a {
+  color: #0070e0;
+  text-decoration: none;
+}
+
+.social-icons {
+  margin-left: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.legal-text {
+  padding: 5px 35px 20px 35px;
+  font-size: 11px;
+  line-height: 13px;
+  color: #001435;
+}
+
+.legal-text p {
+  margin-bottom: 10px;
+}
+
+.legal-text a {
+  color: #001435;
+  text-decoration: none;
+}
+
+/* Screen Size Specifics */
+.screen-sm { max-width: 320px; }
+.screen-md { max-width: 480px; }
+.screen-lg { max-width: 640px; }
+.screen-xl { max-width: 800px; }
+
+.screen-sm .main-title { font-size: 24px; line-height: 28px; }
+.screen-sm .quote-text { font-size: 20px; line-height: 24px; }
