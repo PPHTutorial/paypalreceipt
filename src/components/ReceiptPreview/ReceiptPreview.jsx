@@ -14,23 +14,8 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
     }
   };
 
-  const getWidth = () => {
-    switch(screenSize) {
-      case 'sm': return '320px';
-      case 'md': return '480px';
-      case 'lg': return '640px';
-      case 'xl': return '800px';
-      default: return '640px';
-    }
-  };
-
   return (
-    <div 
-      className={`receipt-container ${getScreenClass()}`} 
-      ref={containerRef} 
-      id="receipt-capture"
-      style={{ width: getWidth(), minWidth: getWidth() }}
-    >
+    <div className={`receipt-container ${getScreenClass()}`} ref={containerRef} id="receipt-capture">
       <div className="receipt-inner">
         {/* Header Greeting */}
         <div className="header-welcome">
@@ -130,22 +115,10 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
 
         {/* Social Icons (Simplified for demo) */}
         <div className="social-icons">
-          {['X', 'Insta', 'FB', 'In'].map((text, i) => (
-            <div key={i} style={{
-              width: '28px',
-              height: '28px',
-              borderRadius: '50%',
-              backgroundColor: '#0070e0',
-              color: 'white',
-              fontSize: '8px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 'bold'
-            }}>
-              {text}
-            </div>
-          ))}
+          <a href="#"><img src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/quantum_leap/footer-social-icons_x.png" width="28" height="28" alt="Twitter" /></a>
+          <a href="#"><img src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_instagram-2x.png" width="28" height="28" alt="Instagram" /></a>
+          <a href="#"><img src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_facebook-2x.png" width="28" height="28" alt="Facebook" /></a>
+          <a href="#"><img src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/footer-social-icons_linkedin-2x.png" width="28" height="28" alt="LinkedIn" /></a>
         </div>
 
         {/* Legal Footer */}
