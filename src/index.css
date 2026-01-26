@@ -54,6 +54,53 @@ input:focus {
   border: 1px solid var(--border);
 }
 
+.main-content {
+  margin-left: 320px;
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  background: radial-gradient(circle at center, #111827 0%, #0a0c10 100%);
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+}
+
+.editor-wrapper {
+  transition: transform 0.3s ease;
+  z-index: 1001;
+  height: 100vh;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 0;
+    padding: 5rem 1rem 2rem 1rem;
+  }
+
+  .editor-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    width: 320px;
+    background: var(--bg-dark);
+  }
+
+  .editor-wrapper.open {
+    transform: translateX(0);
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -1,8 +1,8 @@
 import React from 'react';
-import { RefreshCw, Download, Monitor, Smartphone, Tablet, Layout, Calendar, Layers } from 'lucide-react';
+import { RefreshCw, Download, Monitor, Smartphone, Tablet, Layout, Calendar, Layers, X } from 'lucide-react';
 import './EditorPanel.css';
 
-const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScreenSize }) => {
+const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScreenSize, onClose }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     onChange({ ...data, [name]: value });
@@ -11,7 +11,12 @@ const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScr
   return (
     <div className="editor-panel glass">
       <div className="editor-header">
-        <h2 className="editor-title">Receipt Customizer</h2>
+        <div className="editor-header-top">
+          <h2 className="editor-title">Receipt Customizer</h2>
+          <button className="mobile-close-btn" onClick={onClose}>
+            <X size={20} />
+          </button>
+        </div>
         <p className="editor-subtitle">Adjust values and simulate screens</p>
       </div>
 

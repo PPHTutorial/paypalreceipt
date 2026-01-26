@@ -1,0 +1,34 @@
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 1002;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-nav-logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.logo-accent {
+  color: var(--accent);
+}
+
+.mobile-toggle {
+  background: transparent;
+  color: var(--text-main);
+  padding: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .mobile-nav {
+    display: flex;
+  }
+}

@@ -3,7 +3,9 @@ import { toPng } from 'html-to-image';
 import jsPDF from 'jspdf';
 import EditorPanel from './components/Editor/EditorPanel';
 import ReceiptPreview from './components/ReceiptPreview/ReceiptPreview';
+import MobileNav from './components/Navbar/MobileNav';
 import { getRandomReceipt } from './utils/randomize';
+import { Menu, X } from 'lucide-react';
 
 const App = () => {
   const [data, setData] = useState({
@@ -14,8 +16,9 @@ const App = () => {
     note: 'Your funds have been successfully delivered. Enjoy!',
     batchCount: 1
   });
-
+  
   const [screenSize, setScreenSize] = useState('lg');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const receiptRef = useRef(null);
 
   const handleRandomize = () => {
@@ -78,27 +81,30 @@ const App = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#0a0c10' }}>
-      <EditorPanel 
-        data={data} 
-        onChange={setData} 
-        onRandomize={handleRandomize}
-        onExport={handleExport}
-        screenSize={screenSize}
-        setScreenSize={setScreenSize}
-      />
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#0a0c10', position: 'relative' }}>
+      <MobileNav onToggle={() => setIsSidebarOpen(!isSidebarOpen)} isOpen={isSidebarOpen} />
       
-      <main style={{ 
-        marginLeft: '320px', 
-        flex: 1, 
-        padding: '3rem', 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'flex-start',
-        overflowY: 'auto',
-        background: 'radial-gradient(circle at center, #111827 0%, #0a0c10 100%)'
-      }}>
-        <div style={{ transformOrigin: 'top center', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' }}>
+      <div className={`editor-wrapper ${isSidebarOpen ? 'open' : ''}`}>
+        <EditorPanel 
+          data={data} 
+          onChange={setData} 
+          onRandomize={handleRandomize}
+          onExport={handleExport}
+          screenSize={screenSize}
+          setScreenSize={setScreenSize}
+          onClose={() => setIsSidebarOpen(false)}
+        />
+      </div>
+
+      {isSidebarOpen && (
+        <div 
+          className="sidebar-overlay" 
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      
+      <main className="main-content">
+        <div style={{ transformOrigin: 'top center', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', width: '100%', display: 'flex', justifyContent: 'center' }}>
            <ReceiptPreview data={data} screenSize={screenSize} containerRef={receiptRef} />
         </div>
       </main>

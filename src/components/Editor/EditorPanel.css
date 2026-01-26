@@ -16,6 +16,12 @@
   margin-bottom: 1rem;
 }
 
+.editor-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .editor-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -24,6 +30,25 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.mobile-close-btn {
+  display: none;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.25rem;
+}
+
+@media (max-width: 1024px) {
+  .editor-panel {
+    height: 100vh;
+    border-radius: 0;
+    width: 100%;
+  }
+  .mobile-close-btn {
+    display: block;
+  }
+}
+
 
 .editor-subtitle {
   font-size: 0.875rem;
