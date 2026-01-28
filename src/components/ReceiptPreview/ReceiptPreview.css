@@ -54,11 +54,13 @@
 
 .quote-mark {
   color: #001c64;
-  font-size: 60px;
+  font-size: 80px;
   line-height: 40px;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 700;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 400;
   user-select: none;
+  position: relative;
+  top: 20px;
 }
 
 .quote-text {
