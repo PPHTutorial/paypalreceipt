@@ -42,13 +42,25 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
           <p className="note-title">Note from {platform}</p>
         </div>
 
-        {/* Quote Section */}
-        <div className="quote-container">
-          <span className="quote-mark">“</span>
-          <div className="quote-text">
-            {note || 'Your funds have been successfully delivered. Enjoy!'}
-          </div>
-          <span className="quote-mark">”</span>
+        {/* Quote Section - Table for Email Stability */}
+        <div style={{ padding: '0 35px 25px 35px' }}>
+          <table width="100%" cellPadding="0" cellSpacing="0" border="0" role="presentation">
+            <tbody>
+              <tr>
+                <td width="30" valign="top" style={{ paddingTop: '0' }}>
+                  <span className="quote-mark">“</span>
+                </td>
+                <td valign="top" align="center">
+                  <div className="quote-text">
+                    {note || 'Your funds have been successfully delivered. Enjoy!'}
+                  </div>
+                </td>
+                <td width="30" valign="top" align="right" style={{ paddingTop: '0' }}>
+                  <span className="quote-mark">”</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         {/* Transaction Details Card */}
