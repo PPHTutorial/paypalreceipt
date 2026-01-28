@@ -45,16 +45,6 @@
   margin: 0;
 }
 
-.quote-mark {
-  color: #001c64;
-  font-size: 80px;
-  line-height: 40px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-weight: 400;
-  user-select: none;
-  display: block;
-}
-
 .quote-text {
   font-weight: 500;
   font-size: 26px;

@@ -47,16 +47,28 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
           <table width="100%" cellPadding="0" cellSpacing="0" border="0" role="presentation">
             <tbody>
               <tr>
-                <td width="30" valign="top" style={{ paddingTop: '0' }}>
-                  <span className="quote-mark">“</span>
+                <td width="30" valign="top" style={{ paddingTop: '5px' }}>
+                  <img 
+                    src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/quote-marks-left-2x.png" 
+                    width="26" 
+                    height="22" 
+                    alt="quote"
+                    style={{ display: 'block', width: '26px', height: '22px', border: 0 }} 
+                  />
                 </td>
                 <td valign="top" align="center">
                   <div className="quote-text">
                     {note || 'Your funds have been successfully delivered. Enjoy!'}
                   </div>
                 </td>
-                <td width="30" valign="top" align="right" style={{ paddingTop: '0' }}>
-                  <span className="quote-mark">”</span>
+                <td width="30" valign="top" align="right" style={{ paddingTop: '5px' }}>
+                  <img 
+                    src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/quote-marks-right-2x.png" 
+                    width="26" 
+                    height="22" 
+                    alt="quote"
+                    style={{ display: 'block', width: '26px', height: '22px', border: 0 }}
+                  />
                 </td>
               </tr>
             </tbody>
