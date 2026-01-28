@@ -151,7 +151,7 @@ const App = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               to: data.recipientEmail,
-              subject: "Your payment's waiting",
+              subject: "Your payment's waiting",  
               text: `You have received a receipt from ${data.platform}.`,
               html: htmlContent
             }),
@@ -220,3 +220,5 @@ const App = () => {
 };
 
 export default App;
+    
+
