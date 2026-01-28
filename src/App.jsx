@@ -19,7 +19,7 @@ const App = () => {
     batchCount: 1,
     recipientEmail: '',
     fixedPlatform: true
-  });
+  }); 
   
   const [screenSize, setScreenSize] = useState('lg');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -220,5 +220,5 @@ const App = () => {
 };
 
 export default App;
-    
+
 
