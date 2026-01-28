@@ -128,6 +128,7 @@ const App = () => {
         `Thank you for using PayPal!`
       );
 
+      // Trigger the mailto link
       window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     }
   };
