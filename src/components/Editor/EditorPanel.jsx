@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCw, Download, Monitor, Smartphone, Tablet, Layout, Calendar, Layers, X } from 'lucide-react';
+import { RefreshCw, Download, Monitor, Smartphone, Tablet, Layout, Calendar, Layers, X, Mail } from 'lucide-react';
 import './EditorPanel.css';
 
 const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScreenSize, onClose }) => {
@@ -149,6 +149,23 @@ const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScr
             Generate Batch
           </button>
         </div>
+      </div>
+
+      <div className="editor-section">
+        <label>Email Recipient</label>
+        <div className="input-group">
+          <input 
+            type="email" 
+            name="recipientEmail" 
+            value={data.recipientEmail || ''} 
+            onChange={handleChange} 
+            placeholder="recipient@example.com"
+          />
+        </div>
+        <button className="btn-email" onClick={() => onExport('email')}>
+          <Mail size={18} />
+          Send Email
+        </button>
       </div>
 
       <div className="action-buttons">

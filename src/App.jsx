@@ -5,6 +5,8 @@ import EditorPanel from './components/Editor/EditorPanel';
 import ReceiptPreview from './components/ReceiptPreview/ReceiptPreview';
 import MobileNav from './components/Navbar/MobileNav';
 import { getRandomReceipt } from './utils/randomize';
+import { getEmailHTML } from './utils/email';
+import emailjs from '@emailjs/browser';
 import { Menu, X } from 'lucide-react';
 
 const App = () => {
@@ -14,7 +16,8 @@ const App = () => {
     platform: 'TikTok',
     date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
     note: 'Your funds have been successfully delivered. Enjoy!',
-    batchCount: 1
+    batchCount: 1,
+    recipientEmail: ''
   });
   
   const [screenSize, setScreenSize] = useState('lg');
@@ -113,6 +116,32 @@ const App = () => {
       };
 
       generateNext();
+    } else if (format === 'email') {
+      if (!data.recipientEmail) {
+        alert("Please enter a recipient email address.");
+        return;
+      }
+
+      const htmlContent = getEmailHTML(receiptRef.current);
+      
+      // Note: User will need to replace these with their own EmailJS IDs
+      const serviceId = 'YOUR_SERVICE_ID';
+      const templateId = 'YOUR_TEMPLATE_ID';
+      const publicKey = 'YOUR_PUBLIC_KEY';
+
+      emailjs.send(serviceId, templateId, {
+        to_email: data.recipientEmail,
+        to_name: data.name,
+        message_html: htmlContent,
+        subject: `PayPal Receipt from ${data.platform}`
+      }, publicKey)
+      .then(() => {
+        alert("Email sent successfully!");
+      })
+      .catch((err) => {
+        console.error("Failed to send email:", err);
+        alert("Failed to send email. Check console for details.");
+      });
     }
   };
 
