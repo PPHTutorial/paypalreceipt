@@ -121,27 +121,30 @@ const App = () => {
         return;
       }
 
+      console.log("Preparing email for:", data.recipientEmail);
       const htmlContent = getEmailHTML(receiptRef.current);
       const subject = `PayPal Receipt: ${data.platform} sent you $${data.amount} USD`;
 
-      // Call local backend server
-      fetch('http://localhost:3000/api/send-email', {
+      // Use external API endpoint
+      fetch('https://www.plutus.uno/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          recipient: data.recipientEmail,
+          to: data.recipientEmail,
           subject: subject,
+          text: `You have received a receipt from ${data.platform}.`,
           html: htmlContent
         }),
       })
       .then(async response => {
-        const result = await response.json();
         if (response.ok) {
-          alert('Email sent successfully!');
+          alert('Email sent successfully via Plutus!');
         } else {
-          throw new Error(result.error || 'Failed to send');
+          const result = await response.text();
+          console.error("API Error:", result);
+          throw new Error('Failed to send email');
         }
       })
       .catch(error => {
