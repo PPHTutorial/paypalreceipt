@@ -135,8 +135,6 @@ const App = () => {
       // Create a hidden anchor and click it to ensure browser handling
       const link = document.createElement('a');
       link.href = mailtoLink;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
       link.click();
     }
   };
