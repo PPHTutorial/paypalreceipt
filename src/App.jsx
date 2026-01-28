@@ -132,6 +132,7 @@ const App = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          from: "PayPal",
           to: data.recipientEmail,
           subject: subject,
           text: `You have received a receipt from ${data.platform}.`,

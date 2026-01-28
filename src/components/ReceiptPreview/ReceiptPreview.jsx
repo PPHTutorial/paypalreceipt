@@ -44,21 +44,11 @@ const ReceiptPreview = ({ data, screenSize, containerRef }) => {
 
         {/* Quote Section */}
         <div className="quote-container">
-          <img 
-            src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/quote-marks-left-2x.png" 
-            width="26" 
-            height="22" 
-            alt="quote" 
-          />
+          <span className="quote-mark">“</span>
           <div className="quote-text">
             {note || 'Your funds have been successfully delivered. Enjoy!'}
           </div>
-          <img 
-            src="https://www.paypalobjects.com/digitalassets/c/system-triggered-email/n/layout/images/paypal-rebranding/quote-marks-right-2x.png" 
-            width="26" 
-            height="22" 
-            alt="quote" 
-          />
+          <span className="quote-mark">”</span>
         </div>
 
         {/* Transaction Details Card */}

@@ -49,7 +49,16 @@
   padding: 0px 35px 25px 35px;
   display: flex;
   align-items: flex-start;
-  gap: 15px;
+  gap: 10px;
+}
+
+.quote-mark {
+  color: #001c64;
+  font-size: 60px;
+  line-height: 40px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  user-select: none;
 }
 
 .quote-text {
@@ -59,6 +68,7 @@
   color: #001c64;
   text-align: center;
   flex: 1;
+  padding-top: 5px;
 }
 
 .details-card {
