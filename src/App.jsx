@@ -5,8 +5,6 @@ import EditorPanel from './components/Editor/EditorPanel';
 import ReceiptPreview from './components/ReceiptPreview/ReceiptPreview';
 import MobileNav from './components/Navbar/MobileNav';
 import { getRandomReceipt } from './utils/randomize';
-import { getEmailHTML } from './utils/email';
-import emailjs from '@emailjs/browser';
 import { Menu, X } from 'lucide-react';
 
 const App = () => {
@@ -117,31 +115,20 @@ const App = () => {
 
       generateNext();
     } else if (format === 'email') {
-      if (!data.recipientEmail) {
-        alert("Please enter a recipient email address.");
-        return;
-      }
-
-      const htmlContent = getEmailHTML(receiptRef.current);
+      const recipient = data.recipientEmail || '';
+      const subject = encodeURIComponent(`PayPal Receipt: ${data.platform} sent you $${data.amount} USD`);
       
-      // Note: User will need to replace these with their own EmailJS IDs
-      const serviceId = 'YOUR_SERVICE_ID';
-      const templateId = 'YOUR_TEMPLATE_ID';
-      const publicKey = 'YOUR_PUBLIC_KEY';
+      const body = encodeURIComponent(
+        `Hello ${data.name},\n\n` +
+        `You have received a payment of $${data.amount} USD from ${data.platform}.\n\n` +
+        `Transaction Details:\n` +
+        `- Date: ${data.date}\n` +
+        `- Platform: ${data.platform}\n` +
+        `- Note: ${data.note || 'None'}\n\n` +
+        `Thank you for using PayPal!`
+      );
 
-      emailjs.send(serviceId, templateId, {
-        to_email: data.recipientEmail,
-        to_name: data.name,
-        message_html: htmlContent,
-        subject: `PayPal Receipt from ${data.platform}`
-      }, publicKey)
-      .then(() => {
-        alert("Email sent successfully!");
-      })
-      .catch((err) => {
-        console.error("Failed to send email:", err);
-        alert("Failed to send email. Check console for details.");
-      });
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
     }
   };
 
