@@ -2,10 +2,10 @@ import React from 'react';
 import { RefreshCw, Download, Monitor, Smartphone, Tablet, Layout, Calendar, Layers, X, Mail } from 'lucide-react';
 import './EditorPanel.css';
 
-const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScreenSize, onClose }) => {
+const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScreenSize, onClose, isSending }) => {
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    onChange({ ...data, [name]: value });
+    const { name, value, type, checked } = e.target;
+    onChange({ ...data, [name]: type === 'checkbox' ? checked : value });
   };
 
   return (
@@ -144,6 +144,16 @@ const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScr
             onChange={(e) => onChange({ ...data, batchCount: parseInt(e.target.value) || 1 })}
             className="batch-input"
           />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <input 
+              type="checkbox" 
+              name="fixedPlatform" 
+              checked={data.fixedPlatform} 
+              onChange={handleChange}
+              id="fixedPlatform"
+            />
+            <label htmlFor="fixedPlatform" style={{ fontSize: '10px', margin: 0, textTransform: 'none' }}>Same Platform</label>
+          </div>
           <button className="btn-batch" onClick={() => onExport('batch')}>
             <Layers size={18} />
             Generate Batch
@@ -162,9 +172,14 @@ const EditorPanel = ({ data, onChange, onRandomize, onExport, screenSize, setScr
             placeholder="recipient@example.com"
           />
         </div>
-        <button className="btn-email" onClick={() => onExport('email')}>
+        <button 
+          className="btn-email" 
+          onClick={() => onExport('email')} 
+          disabled={isSending}
+          style={isSending ? { opacity: 0.7, cursor: 'not-allowed' } : {}}
+        >
           <Mail size={18} />
-          Send Email
+          {isSending ? 'Sending...' : 'Send Email'}
         </button>
       </div>
 

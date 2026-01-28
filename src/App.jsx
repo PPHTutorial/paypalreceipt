@@ -15,12 +15,15 @@ const App = () => {
     platform: 'TikTok',
     date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
     note: 'Your funds have been successfully delivered. Enjoy!',
+    note: 'Your funds have been successfully delivered. Enjoy!',
     batchCount: 1,
-    recipientEmail: ''
+    recipientEmail: '',
+    fixedPlatform: true
   });
   
   const [screenSize, setScreenSize] = useState('lg');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const receiptRef = useRef(null);
 
   const handleRandomize = () => {
@@ -121,37 +124,65 @@ const App = () => {
         return;
       }
 
-      console.log("Preparing email for:", data.recipientEmail);
-      const htmlContent = getEmailHTML(receiptRef.current);
-      const subject = `PayPal Receipt: ${data.platform} sent you $${data.amount} USD`;
+      setIsSending(true);
+      const count = data.batchCount || 1;
+      let currentIdx = 0;
+      const initialPlatform = data.platform;
 
-      // Use external API endpoint
-      fetch('https://www.plutus.uno/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: "PayPal",
-          to: data.recipientEmail,
-          subject: subject,
-          text: `You have received a receipt from ${data.platform}.`,
-          html: htmlContent
-        }),
-      })
-      .then(async response => {
-        if (response.ok) {
-          alert('Email sent successfully via Plutus!');
-        } else {
-          const result = await response.text();
-          console.error("API Error:", result);
-          throw new Error('Failed to send email');
+      const sendNextEmail = async () => {
+        if (currentIdx >= count) {
+          setIsSending(false);
+          alert(`Successfully sent ${count} email(s) via Plutus!`);
+          return;
         }
-      })
-      .catch(error => {
-        console.error('Error sending email:', error);
-        alert('Failed to send email. Make sure the local server is running (npm run server).');
-      });
+
+        // Randomize for next receipt if strictly needed (except first iteration if we want to send current)
+        // OR: we send current, then randomize for next.
+        // Let's adopt: Send Current -> Randomize -> Wait -> Loop
+        
+        try {
+          // Capture current state
+          const htmlContent = getEmailHTML(receiptRef.current);
+          const subject = `PayPal Receipt: ${data.platform} sent you $${data.amount} USD`;
+
+          // Send API request
+          const response = await fetch('https://www.plutus.uno/api/send-email', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              to: data.recipientEmail,
+              subject: subject,
+              text: `You have received a receipt from ${data.platform}.`,
+              html: htmlContent
+            }),
+          });
+
+          if (!response.ok) throw new Error('API request failed');
+          
+          currentIdx++;
+          
+          // Prepare next receipt if needed
+          if (currentIdx < count) {
+            const randomData = getRandomReceipt();
+            if (data.fixedPlatform) {
+              randomData.platform = initialPlatform;
+            }
+            setData(prev => ({ ...prev, ...randomData }));
+            
+            // Wait for render
+            setTimeout(sendNextEmail, 1500); 
+          } else {
+            sendNextEmail(); // Finalize
+          }
+
+        } catch (error) {
+          console.error('Error sending email:', error);
+          alert(`Failed after ${currentIdx} emails. Stopping batch.`);
+          setIsSending(false);
+        }
+      };
+
+      sendNextEmail();
     }
   };
 
@@ -168,6 +199,7 @@ const App = () => {
           screenSize={screenSize}
           setScreenSize={setScreenSize}
           onClose={() => setIsSidebarOpen(false)}
+          isSending={isSending}
         />
       </div>
 
