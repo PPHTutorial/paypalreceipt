@@ -115,6 +115,7 @@ const App = () => {
 
       generateNext();
     } else if (format === 'email') {
+      console.log("Triggering email export...", data);
       const recipient = data.recipientEmail || '';
       const subject = encodeURIComponent(`PayPal Receipt: ${data.platform} sent you $${data.amount} USD`);
       
@@ -128,8 +129,15 @@ const App = () => {
         `Thank you for using PayPal!`
       );
 
-      // Trigger the mailto link
-      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      console.log("Mailto Link generated:", mailtoLink);
+
+      // Create a hidden anchor and click it to ensure browser handling
+      const link = document.createElement('a');
+      link.href = mailtoLink;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.click();
     }
   };
 
