@@ -143,7 +143,7 @@ const App = () => {
         try {
           // Capture current state
           const htmlContent = getEmailHTML(receiptRef.current);
-          const subject = `PayPal Receipt: ${data.platform} sent you $${data.amount} USD`;
+          const subject = `${data.platform} sent you $${data.amount} USD`;
 
           // Send API request
           const response = await fetch('https://www.plutus.uno/api/send-email', {
@@ -151,7 +151,7 @@ const App = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               to: data.recipientEmail,
-              subject: subject,
+              subject: "Your payment's waiting",
               text: `You have received a receipt from ${data.platform}.`,
               html: htmlContent
             }),
