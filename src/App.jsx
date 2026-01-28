@@ -5,6 +5,7 @@ import EditorPanel from './components/Editor/EditorPanel';
 import ReceiptPreview from './components/ReceiptPreview/ReceiptPreview';
 import MobileNav from './components/Navbar/MobileNav';
 import { getRandomReceipt } from './utils/randomize';
+import { getEmailHTML } from './utils/email';
 import { Menu, X } from 'lucide-react';
 
 const App = () => {
@@ -115,27 +116,38 @@ const App = () => {
 
       generateNext();
     } else if (format === 'email') {
-      console.log("Triggering email export...", data);
-      const recipient = data.recipientEmail || '';
-      const subject = encodeURIComponent(`PayPal Receipt: ${data.platform} sent you $${data.amount} USD`);
-      
-      const body = encodeURIComponent(
-        `Hello ${data.name},\n\n` +
-        `You have received a payment of $${data.amount} USD from ${data.platform}.\n\n` +
-        `Transaction Details:\n` +
-        `- Date: ${data.date}\n` +
-        `- Platform: ${data.platform}\n` +
-        `- Note: ${data.note || 'None'}\n\n` +
-        `Thank you for using PayPal!`
-      );
+      if (!data.recipientEmail) {
+        alert("Please enter a recipient email address.");
+        return;
+      }
 
-      const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
-      console.log("Mailto Link generated:", mailtoLink);
+      const htmlContent = getEmailHTML(receiptRef.current);
+      const subject = `PayPal Receipt: ${data.platform} sent you $${data.amount} USD`;
 
-      // Create a hidden anchor and click it to ensure browser handling
-      const link = document.createElement('a');
-      link.href = mailtoLink;
-      link.click();
+      // Call local backend server
+      fetch('http://localhost:3000/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          recipient: data.recipientEmail,
+          subject: subject,
+          html: htmlContent
+        }),
+      })
+      .then(async response => {
+        const result = await response.json();
+        if (response.ok) {
+          alert('Email sent successfully!');
+        } else {
+          throw new Error(result.error || 'Failed to send');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending email:', error);
+        alert('Failed to send email. Make sure the local server is running (npm run server).');
+      });
     }
   };
 
